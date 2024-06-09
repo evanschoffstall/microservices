@@ -1,3 +1,5 @@
+# TODO: no sleep, use while loop to check if sql server is up
+# TODO: something more intutive than while loop for keeping the container alive like supervisord or similar
 services:
   mysql:
     environment:
