@@ -1,0 +1,40 @@
+services:
+  ubuntu-slim:
+    build:
+      context: .
+      dockerfile_inline: |
+        # Start with Ubuntu latest
+        FROM ubuntu:latest
+
+        # Update the package list
+        RUN apt-get update -y
+
+        # Uninstall all packages
+        RUN apt-get purge -y '*' > /dev/null 2>&1 || true
+
+        # Install only necessary packages: 
+        RUN apt-get install -y \
+            bash \
+            ca-certificates \
+            curl \
+            nano \
+            openssh-client \
+            openssl
+
+        # Remove apt cache from the container to save space
+        RUN rm -rf /var/lib/apt/lists/*
+
+        # Remove unnecessary man pages, docs, locales, etc.
+        RUN rm -rf /usr/share/doc /usr/share/doc-base /usr/share/man /usr/share/locale /usr/share/zoneinfo
+
+        # Clean up temp files
+        RUN rm -rf /tmp/* /var/tmp/*
+
+        # Set the working directory
+        WORKDIR /app
+
+        # keep open with tail
+        CMD ["tail", "-f", "/dev/null"]
+
+        # echo size of / and memory usage
+        #CMD ["sh", "-c", "echo 'Disk usage:' && df -h && echo 'Memory usage:' && free -m"]
