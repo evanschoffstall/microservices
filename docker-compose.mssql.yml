@@ -1,7 +1,7 @@
 # TODO: no sleep, use while loop to check if sql server is up
 # TODO: something more intutive than while loop for keeping the container alive like supervisord or similar
 services:
-  ubuntu-slim:
+  mssql:
     environment:
       MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD} 
       ACCEPT_EULA: Y
