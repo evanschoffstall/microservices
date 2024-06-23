@@ -1,0 +1,15 @@
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: '${PGADMIN_DEFAULT_EMAIL}'
+      PGADMIN_DEFAULT_PASSWORD: '${PGADMIN_DEFAULT_PASSWORD}'
+      # If you want pgadmin to be on a subpath, use SCRIPT_NAME
+      # SCRIPT_NAME: /_admin/pgadmin
+    ports:
+      - "8080:80"
+volumes:
+  pgadmin:
